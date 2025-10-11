@@ -17,6 +17,11 @@ const pages = {
   mobs: `
     <h1>Mobs 👾</h1>
     <p>Mobs are living creatures in BlockCraft. Some are friendly. Some… not so much 👀.</p>
+    <ul>
+      <li><strong>Sheep</strong> — they just vibin’ 🐑</li>
+      <li><strong>Creeper</strong> — emotional damage 💥</li>
+      <li><strong>Skeleton</strong> — 360 noscope with a bow 🏹</li>
+    </ul>
   `,
   faq: `
     <h1>FAQ ❓</h1>
