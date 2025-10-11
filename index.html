@@ -7,61 +7,78 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- HEADER -->
   <header>
     <div class="logo">
       <img src="images/wiki-logo.png" alt="Wiki Logo">
       <h1>Electron: Chat App Wiki</h1>
     </div>
     <div class="search">
-  <input type="text" id="search" placeholder="Search the wiki... 🔍">
-</div>
+      <input type="text" id="search" placeholder="Search the wiki... 🔍">
+    </div>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <div class="container">
-  <nav id="sidebar"></nav>
+    <!-- SIDEBAR -->
+    <nav id="sidebar"></nav>
 
+    <!-- MAIN CONTENT -->
     <main>
       <div id="content">Loading...</div>
     </main>
   </div>
 
+  <!-- FOOTER -->
   <footer>
     <p>BlockCraft Wiki • Inspired by Minecraft Wiki • Made with ✨vibes✨</p>
   </footer>
 
-<script src="pages.js?v=1"></script>
-<script src="version.js?v=1"></script>
-<script src="search.js?v=1"></script>
+  <!-- SCRIPTS (Order Matters!) -->
+  <script src="pages.js?v=1"></script>
+  <script src="version.js?v=1"></script>
+  <script src="search.js?v=1"></script>
+
+  <!-- MAIN WIKI LOGIC -->
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById("content");
     const params = new URLSearchParams(window.location.search);
     const page = params.get("page") || "home";
-    
+
+    // Load page content
     if (pages[page]) {
       content.innerHTML = pages[page];
     } else {
       content.innerHTML = `<h1>404 💀</h1><p>This page does not exist, traveler.</p>`;
     }
 
+    // Highlight active sidebar link if exists
     const activeLink = document.getElementById(`link-${page}`);
     if (activeLink) activeLink.classList.add("active");
 
-  async function loadSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const response = await fetch('sidebar.html');
-    sidebar.innerHTML = await response.text();
+    // Load sidebar dynamically
+    async function loadSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      try {
+        const response = await fetch('sidebar.html');
+        sidebar.innerHTML = await response.text();
 
-    // Optional: Highlight the active page link
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPage = urlParams.get('page') || 'home';
-    sidebar.querySelectorAll('a').forEach(link => {
-      if (link.getAttribute('href') === `?page=${currentPage}`) {
-        link.classList.add('active');
+        // Highlight current page in sidebar
+        const currentPage = params.get('page') || 'home';
+        sidebar.querySelectorAll('a').forEach(link => {
+          if (link.getAttribute('href') === `?page=${currentPage}`) {
+            link.classList.add('active');
+          }
+        });
+      } catch (err) {
+        sidebar.innerHTML = `<p>Failed to load sidebar 😭</p>`;
+        console.error(err);
       }
-    });
-  }
+    }
 
-  loadSidebar();
-</script>
+    loadSidebar();
+  });
+  </script>
 </body>
 </html>
