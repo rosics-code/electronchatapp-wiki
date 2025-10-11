@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Wiki 📝</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 230px;
+      background: #222;
+      color: #fff;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    nav h2 {
+      margin-top: 0;
+    }
+
+    nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+      padding: 1rem;
+      background: #f5f5f5;
+    }
+
+    #content {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>My Wiki ✨</h2>
+    <a href="?page=home">Home</a>
+    <a href="?page=joiningguides">Joining Guides</a>
+    <a href="?page=faq">FAQ</a>
+  </nav>
+
+  <main>
+    <div id="content">Loading...</div>
+  </main>
+
+  <script>
+    const pages = {
+      home: `
+        <h1>Welcome to My Wiki 🏡</h1>
+        <p>This is your central hub for all the chaos, lore, and info you could ever want 😎</p>
+        <ul>
+          <li>💥 <strong>Joining Guides</strong> — how to become part of the madness</li>
+          <li>❓ <strong>FAQ</strong> — for when you’re confused (which is probably always 😏)</li>
+        </ul>
+        <p><em>Tip: Use the sidebar to navigate between pages!</em></p>
+        <img src="https-home-banner.png" alt="Wiki banner" style="max-width: 100%; border-radius: 8px;">
+      `,
+
+      joiningguides: `
+        <h1>Joining Guides 🚪</h1>
+        <p>Wanna join? Here’s how, bestie:</p>
+        <ol>
+          <li>Step 1: Don’t be a jaxle 😤</li>
+          <li>Step 2: Bring snacks 🍿</li>
+          <li>Step 3: Actually read the rules 👀</li>
+        </ol>
+      `,
+
+      faq: `
+        <h1>FAQ ❓</h1>
+        <p><strong>Q:</strong> What is this place?</p>
+        <p><strong>A:</strong> Organized chaos, basically 😎</p>
+        <p><strong>Q:</strong> How do I make my own page?</p>
+        <p><strong>A:</strong> Add a new key to the <code>pages</code> object, then link to it in the sidebar.</p>
+      `
+    };
+
+    const content = document.getElementById("content");
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get("page") || "home";
+
+    if (pages[page]) {
+      content.innerHTML = pages[page];
+    } else {
+      content.innerHTML = `
+        <h1>404 💀</h1>
+        <p>Oopsie, that page doesn’t exist. Maybe you typed it wrong? Or maybe it’s just gone forever 😔</p>
+      `;
+    }
+  </script>
+</body>
+</html>
