@@ -3,147 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Wiki ✨</title>
-  <style>
-    :root {
-      --bg-dark: #1e1e2f;
-      --bg-light: #2c2c40;
-      --accent: #7b5cff;
-      --text: #f0f0f5;
-      --text-muted: #aaa;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Segoe UI", system-ui, sans-serif;
-      margin: 0;
-      background: var(--bg-dark);
-      color: var(--text);
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar */
-    nav {
-      width: 250px;
-      background: var(--bg-light);
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    nav h2 {
-      margin: 0 0 1rem;
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      padding: 0.6rem 0.8rem;
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
-
-    nav a:hover {
-      background: var(--accent);
-      color: white;
-    }
-
-    nav a.active {
-      background: var(--accent);
-      color: white;
-    }
-
-    /* Content */
-    main {
-      flex: 1;
-      padding: 2rem;
-      background: #f7f7fb;
-      color: #222;
-      overflow-y: auto;
-    }
-
-    #content {
-      max-width: 800px;
-      margin: 0 auto;
-      white-space: pre-wrap;
-    }
-
-    h1 {
-      margin-top: 0;
-      color: var(--accent);
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 800px) {
-      body {
-        flex-direction: column;
-      }
-      nav {
-        width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      nav a {
-        padding: 0.5rem 1rem;
-      }
-      main {
-        padding: 1rem;
-      }
-    }
-  </style>
+  <title>BlockCraft Wiki 🧱✨</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <h2>My Wiki ✨</h2>
-    <a href="?page=home" id="link-home">Home</a>
-    <a href="?page=joiningguides" id="link-joiningguides">Joining Guides</a>
-    <a href="?page=faq" id="link-faq">FAQ</a>
-  </nav>
+  <header>
+    <div class="logo">
+      <img src="images/wiki-logo.png" alt="Wiki Logo">
+      <h1>BlockCraft Wiki</h1>
+    </div>
+    <div class="search">
+      <input type="text" placeholder="Search... (not functional yet 👀)">
+    </div>
+  </header>
 
-  <main>
-    <div id="content">Loading...</div>
-  </main>
+  <div class="container">
+    <nav>
+      <h2>Navigation</h2>
+      <a href="?page=home" id="link-home">🏡 Home</a>
+      <a href="?page=blocks" id="link-blocks">🧱 Blocks</a>
+      <a href="?page=mobs" id="link-mobs">👾 Mobs</a>
+      <a href="?page=faq" id="link-faq">❓ FAQ</a>
+    </nav>
+
+    <main>
+      <div id="content">Loading...</div>
+    </main>
+  </div>
+
+  <footer>
+    <p>BlockCraft Wiki • Inspired by Minecraft Wiki • Made with ✨vibes✨</p>
+  </footer>
 
   <script>
     const pages = {
       home: `
-        <h1>Welcome to My Wiki 🏡</h1>
-        <p>This is your central hub for all the chaos, lore, and juicy info 😎</p>
-        <ul>
-          <li>✨ <strong>Joining Guides</strong> — how to become part of the squad</li>
-          <li>❓ <strong>FAQ</strong> — your questions, my answers</li>
-        </ul>
-        <img src="wiki-banner.png" alt="Wiki Banner">
+        <h1>Welcome to BlockCraft Wiki 🏡</h1>
+        <p>Welcome traveler! This wiki is your guide to the BlockCraft world — inspired by Minecraft but ✨ cooler ✨.</p>
+        <p>Here you can learn about blocks, mobs, gameplay mechanics, and all the chaotic lore 😎</p>
+        <img src="images/home-banner.png" alt="Wiki Banner">
       `,
-      joiningguides: `
-        <h1>Joining Guides 🚪</h1>
-        <p>How to join the gang without being a total jaxle 😤</p>
-        <ol>
-          <li>Step 1: Respect the squad.</li>
-          <li>Step 2: Bring snacks 🍿</li>
-          <li>Step 3: Learn the lore.</li>
-        </ol>
+      blocks: `
+        <h1>Blocks 🧱</h1>
+        <p>Blocks are the main building units of BlockCraft. They can be placed, mined, and decorated.</p>
+        <ul>
+          <li><strong>Stone</strong> — the OG block.</li>
+          <li><strong>Grass Block</strong> — because dirt deserves a glow-up.</li>
+          <li><strong>Glowstone</strong> — party light ✨.</li>
+        </ul>
+      `,
+      mobs: `
+        <h1>Mobs 👾</h1>
+        <p>Mobs are living creatures in BlockCraft. Some are friendly. Some… not so much 👀.</p>
+        <ul>
+          <li><strong>Sheep</strong> — they just vibin’ 🐑</li>
+          <li><strong>Creeper</strong> — emotional damage 💥</li>
+          <li><strong>Skeleton</strong> — 360 noscope with a bow 🏹</li>
+        </ul>
       `,
       faq: `
         <h1>FAQ ❓</h1>
-        <p><strong>Q:</strong> What is this place?<br>
-        <strong>A:</strong> A chaotic wiki made cooler than your ex’s mixtape 😎</p>
-        <p><strong>Q:</strong> How do I make my own page?<br>
-        <strong>A:</strong> Add a new key to <code>pages</code> and link it in the sidebar.</p>
+        <p><strong>Q:</strong> Is this the real Minecraft Wiki?<br>
+        <strong>A:</strong> Nah, bestie, this is BlockCraft 😎</p>
+        <p><strong>Q:</strong> Why does it look so clean?<br>
+        <strong>A:</strong> Because universal CSS ✨</p>
       `
     };
 
@@ -151,17 +74,13 @@
     const params = new URLSearchParams(window.location.search);
     const page = params.get("page") || "home";
 
-    // Load the page
     if (pages[page]) {
       content.innerHTML = pages[page];
     } else {
-      content.innerHTML = `
-        <h1>404 💀</h1>
-        <p>Oopsie, that page doesn’t exist.</p>
-      `;
+      content.innerHTML = `<h1>404 💀</h1><p>This page does not exist, traveler.</p>`;
     }
 
-    // Highlight active link
+    // Active link highlight
     const activeLink = document.getElementById(`link-${page}`);
     if (activeLink) activeLink.classList.add("active");
   </script>
