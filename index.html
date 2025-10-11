@@ -3,55 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Wiki 📝</title>
+  <title>My Wiki ✨</title>
   <style>
+    :root {
+      --bg-dark: #1e1e2f;
+      --bg-light: #2c2c40;
+      --accent: #7b5cff;
+      --text: #f0f0f5;
+      --text-muted: #aaa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
+      font-family: "Segoe UI", system-ui, sans-serif;
       margin: 0;
+      background: var(--bg-dark);
+      color: var(--text);
       display: flex;
       min-height: 100vh;
     }
 
+    /* Sidebar */
     nav {
-      width: 230px;
-      background: #222;
-      color: #fff;
-      padding: 1rem;
-      box-sizing: border-box;
+      width: 250px;
+      background: var(--bg-light);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     nav h2 {
-      margin-top: 0;
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      color: var(--accent);
     }
 
     nav a {
-      display: block;
-      color: #fff;
       text-decoration: none;
-      padding: 8px 0;
+      color: var(--text);
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      transition: background 0.2s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: var(--accent);
+      color: white;
     }
 
+    nav a.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Content */
     main {
       flex: 1;
-      padding: 1rem;
-      background: #f5f5f5;
+      padding: 2rem;
+      background: #f7f7fb;
+      color: #222;
+      overflow-y: auto;
     }
 
     #content {
+      max-width: 800px;
+      margin: 0 auto;
       white-space: pre-wrap;
+    }
+
+    h1 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
+      }
+      nav {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        padding: 0.5rem 1rem;
+      }
+      main {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
     <h2>My Wiki ✨</h2>
-    <a href="?page=home">Home</a>
-    <a href="?page=joiningguides">Joining Guides</a>
-    <a href="?page=faq">FAQ</a>
+    <a href="?page=home" id="link-home">Home</a>
+    <a href="?page=joiningguides" id="link-joiningguides">Joining Guides</a>
+    <a href="?page=faq" id="link-faq">FAQ</a>
   </nav>
 
   <main>
@@ -62,31 +122,28 @@
     const pages = {
       home: `
         <h1>Welcome to My Wiki 🏡</h1>
-        <p>This is your central hub for all the chaos, lore, and info you could ever want 😎</p>
+        <p>This is your central hub for all the chaos, lore, and juicy info 😎</p>
         <ul>
-          <li>💥 <strong>Joining Guides</strong> — how to become part of the madness</li>
-          <li>❓ <strong>FAQ</strong> — for when you’re confused (which is probably always 😏)</li>
+          <li>✨ <strong>Joining Guides</strong> — how to become part of the squad</li>
+          <li>❓ <strong>FAQ</strong> — your questions, my answers</li>
         </ul>
-        <p><em>Tip: Use the sidebar to navigate between pages!</em></p>
-        <img src="https-home-banner.png" alt="Wiki banner" style="max-width: 100%; border-radius: 8px;">
+        <img src="wiki-banner.png" alt="Wiki Banner">
       `,
-
       joiningguides: `
         <h1>Joining Guides 🚪</h1>
-        <p>Wanna join? Here’s how, bestie:</p>
+        <p>How to join the gang without being a total jaxle 😤</p>
         <ol>
-          <li>Step 1: Don’t be a jaxle 😤</li>
+          <li>Step 1: Respect the squad.</li>
           <li>Step 2: Bring snacks 🍿</li>
-          <li>Step 3: Actually read the rules 👀</li>
+          <li>Step 3: Learn the lore.</li>
         </ol>
       `,
-
       faq: `
         <h1>FAQ ❓</h1>
-        <p><strong>Q:</strong> What is this place?</p>
-        <p><strong>A:</strong> Organized chaos, basically 😎</p>
-        <p><strong>Q:</strong> How do I make my own page?</p>
-        <p><strong>A:</strong> Add a new key to the <code>pages</code> object, then link to it in the sidebar.</p>
+        <p><strong>Q:</strong> What is this place?<br>
+        <strong>A:</strong> A chaotic wiki made cooler than your ex’s mixtape 😎</p>
+        <p><strong>Q:</strong> How do I make my own page?<br>
+        <strong>A:</strong> Add a new key to <code>pages</code> and link it in the sidebar.</p>
       `
     };
 
@@ -94,14 +151,19 @@
     const params = new URLSearchParams(window.location.search);
     const page = params.get("page") || "home";
 
+    // Load the page
     if (pages[page]) {
       content.innerHTML = pages[page];
     } else {
       content.innerHTML = `
         <h1>404 💀</h1>
-        <p>Oopsie, that page doesn’t exist. Maybe you typed it wrong? Or maybe it’s just gone forever 😔</p>
+        <p>Oopsie, that page doesn’t exist.</p>
       `;
     }
+
+    // Highlight active link
+    const activeLink = document.getElementById(`link-${page}`);
+    if (activeLink) activeLink.classList.add("active");
   </script>
 </body>
 </html>
