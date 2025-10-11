@@ -18,13 +18,7 @@
   </header>
 
   <div class="container">
-    <nav>
-      <h2>Navigation</h2>
-      <a href="?page=home" id="link-home">🏡 Home</a>
-      <a href="?page=blocks" id="link-blocks">🧱 Blocks</a>
-      <a href="?page=mobs" id="link-mobs">👾 Mobs</a>
-      <a href="?page=faq" id="link-faq">❓ FAQ</a>
-    </nav>
+  <nav id="sidebar"></nav>
 
     <main>
       <div id="content">Loading...</div>
@@ -36,6 +30,9 @@
   </footer>
 
   <script>
+    const content = document.getElementById("content");
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get("page") || "home";
     const pages = {
       home: `
         <h1>Welcome to BlockCraft Wiki 🏡</h1>
@@ -70,19 +67,32 @@
       `
     };
 
-    const content = document.getElementById("content");
-    const params = new URLSearchParams(window.location.search);
-    const page = params.get("page") || "home";
-
     if (pages[page]) {
       content.innerHTML = pages[page];
     } else {
       content.innerHTML = `<h1>404 💀</h1><p>This page does not exist, traveler.</p>`;
     }
 
-    // Active link highlight
     const activeLink = document.getElementById(`link-${page}`);
     if (activeLink) activeLink.classList.add("active");
-  </script>
+
+  async function loadSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const response = await fetch('sidebar.html');
+    sidebar.innerHTML = await response.text();
+
+    // Optional: Highlight the active page link
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || 'home';
+    sidebar.querySelectorAll('a').forEach(link => {
+      if (link.getAttribute('href') === `?page=${currentPage}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  loadSidebar();
+</script>
+
 </body>
 </html>
