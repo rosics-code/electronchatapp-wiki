@@ -1,3 +1,4 @@
+// search.js — BlockCraft Wiki Search 🔍
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search');
   const content = document.getElementById('content');
@@ -7,11 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = searchInput.value.trim().toLowerCase();
     if (!query) return;
 
+    // 1. Exact page match
     if (pages[query]) {
       window.location.href = `?page=${query}`;
       return;
     }
 
+    // 2. Search page content (strip HTML)
     const results = Object.entries(pages).filter(([key, html]) => {
       const text = html.replace(/<[^>]*>/g, "").toLowerCase();
       return key.toLowerCase().includes(query) || text.includes(query);
