@@ -1,0 +1,149 @@
+:root {
+  --bg-sidebar: #f0f0f0;
+  --bg-main: #ffffff;
+  --bg-header: #2d6a4f;
+  --accent: #40916c;
+  --text-dark: #222;
+  --text-light: #ffffff;
+  --border-color: #dcdcdc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: var(--bg-header);
+  color: var(--text-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+header .logo img {
+  width: 40px;
+  height: 40px;
+}
+
+header .logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header .search input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: none;
+}
+
+/* MAIN CONTAINER */
+.container {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* SIDEBAR */
+nav {
+  background: var(--bg-sidebar);
+  width: 220px;
+  padding: 1rem;
+  border-right: 1px solid var(--border-color);
+}
+
+nav h2 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  color: var(--accent);
+}
+
+nav a {
+  display: block;
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.2rem;
+}
+
+nav a:hover {
+  background: var(--accent);
+  color: var(--text-light);
+}
+
+nav a.active {
+  background: var(--accent);
+  color: var(--text-light);
+}
+
+/* MAIN CONTENT */
+main {
+  flex: 1;
+  padding: 1.5rem;
+  background: var(--bg-main);
+}
+
+#content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: var(--accent);
+}
+
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 0.8rem;
+  background: #efefef;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  nav {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  nav a {
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  #content {
+    padding: 0.5rem;
+  }
+}
