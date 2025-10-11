@@ -1,5 +1,5 @@
   <script>
-  const SITE_VERSION = "1.0.0";
+  const SITE_VERSION = "1.0.5";
 
   document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
     const url = new URL(el.href || el.src, location.origin);
