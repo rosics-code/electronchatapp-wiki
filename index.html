@@ -33,39 +33,6 @@
     const content = document.getElementById("content");
     const params = new URLSearchParams(window.location.search);
     const page = params.get("page") || "home";
-    const pages = {
-      home: `
-        <h1>Welcome to BlockCraft Wiki 🏡</h1>
-        <p>Welcome traveler! This wiki is your guide to the BlockCraft world — inspired by Minecraft but ✨ cooler ✨.</p>
-        <p>Here you can learn about blocks, mobs, gameplay mechanics, and all the chaotic lore 😎</p>
-        <img src="images/home-banner.png" alt="Wiki Banner">
-      `,
-      blocks: `
-        <h1>Blocks 🧱</h1>
-        <p>Blocks are the main building units of BlockCraft. They can be placed, mined, and decorated.</p>
-        <ul>
-          <li><strong>Stone</strong> — the OG block.</li>
-          <li><strong>Grass Block</strong> — because dirt deserves a glow-up.</li>
-          <li><strong>Glowstone</strong> — party light ✨.</li>
-        </ul>
-      `,
-      mobs: `
-        <h1>Mobs 👾</h1>
-        <p>Mobs are living creatures in BlockCraft. Some are friendly. Some… not so much 👀.</p>
-        <ul>
-          <li><strong>Sheep</strong> — they just vibin’ 🐑</li>
-          <li><strong>Creeper</strong> — emotional damage 💥</li>
-          <li><strong>Skeleton</strong> — 360 noscope with a bow 🏹</li>
-        </ul>
-      `,
-      faq: `
-        <h1>FAQ ❓</h1>
-        <p><strong>Q:</strong> Is this the real Minecraft Wiki?<br>
-        <strong>A:</strong> Nah, bestie, this is BlockCraft 😎</p>
-        <p><strong>Q:</strong> Why does it look so clean?<br>
-        <strong>A:</strong> Because universal CSS ✨</p>
-      `
-    };
     
     if (pages[page]) {
       content.innerHTML = pages[page];
@@ -93,6 +60,8 @@
 
   loadSidebar();
 </script>
-<script src="search.js"></script>
+<script src="pages.js?v=1"></script>
+<script src="version.js?v=1"></script>
+<script src="search.js?v=1"></script>
 </body>
 </html>
