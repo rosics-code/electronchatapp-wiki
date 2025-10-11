@@ -67,6 +67,13 @@
       `
     };
 
+  document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(el => {
+    const url = new URL(el.href || el.src, location.origin);
+    url.searchParams.set('v', Date.now()); // use timestamp so it’s always unique
+    if (el.tagName === 'LINK') el.href = url;
+    else el.src = url;
+  });
+    
     if (pages[page]) {
       content.innerHTML = pages[page];
     } else {
